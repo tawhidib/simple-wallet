@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<!--CSS Links-->
+		<link
+			rel="stylesheet"
+			href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+			integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+			crossorigin="anonymous"
+		/>
+		<link rel="stylesheet" href="style.css" />
+		<title>Simple Wallet System</title>
+	</head>
+	<body>
+		<div id="login-area">
+			<h1 class="text-center">This is My Wallet</h1>
+			<div class="submit-area">
+				<h4 class="text-uppercase">login</h4>
+				<input class="form-control" type="email" placeholder="Email" />
+				<br />
+				<input
+					class="form-control"
+					type="password"
+					placeholder="Password"
+				/>
+				<br />
+				<button id="login" class="btn btn-success">Enter</button>
+			</div>
+		</div>
+
+		<!--Transaction area-->
+
+		<div id="transaction-area">
+			<div class="transaction-status">
+				<div class="row">
+					<div class="col-md-4">
+						<div class="deposit status">
+							<h5>Deposit</h5>
+							<h2 id="totalDeposit">$00</h2>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="withdraw status">
+							<h5>Withdraw</h5>
+							<h2 id="totalWithdraw">$00</h2>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="balance status">
+							<h5>Balance</h5>
+							<h2 id="totalBalance"></h2>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="new-transaction">
+				<div class="row">
+					<div class="col-md-6">
+						<div class="submit-area status">
+							<h5>Deposit</h5>
+							<br />
+							<input
+								class="form-control"
+								id="depositAmount"
+								type="text"
+								placeholder="$ amount you want to deposit"
+							/>
+							<br />
+							<button id="deposit" class="btn btn-success">
+								Deposit
+							</button>
+						</div>
+					</div>
+
+					<div class="col-md-6">
+						<div class="submit-area status">
+							<h5>Withdraw</h5>
+							<br />
+							<input
+								class="form-control"
+								id="withdrawAmount"
+								type="text"
+								placeholder="$ amount you want to withdraw"
+							/>
+							<br />
+							<button id="withdraw" class="btn btn-success">
+								Withdraw
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!--JavaScript-->
+		<script>
+			//login button even handler
+			const loginBtn = document.getElementById("login");
+			loginBtn.addEventListener("click", function () {
+				const loginArea = document.getElementById("login-area");
+				loginArea.style.display = "none";
+				const transactionArea =
+					document.getElementById("transaction-area");
+				transactionArea.style.display = "block";
+			});
+
+			// some variables
+			let totalDeposit = 0;
+			let totalWithdraw = 0;
+			let totalBalance = 1240;
+			document.getElementById("totalBalance").innerText =
+				"$" + totalBalance;
+
+			//deposit button even handler
+			const depositBtn = document.getElementById("deposit");
+			depositBtn.addEventListener("click", function () {
+				let depositAmount =
+					document.getElementById("depositAmount").value;
+				totalDeposit = totalDeposit + parseFloat(depositAmount);
+				document.getElementById("totalDeposit").innerText =
+					"$" + totalDeposit;
+				totalBalance = totalBalance + parseFloat(depositAmount);
+				document.getElementById("totalBalance").innerText =
+					"$" + totalBalance;
+			});
+
+			//withdraw button even handler
+			const withdrawBtn = document.getElementById("withdraw");
+			withdrawBtn.addEventListener("click", function () {
+				const withdrawAmount =
+					document.getElementById("withdrawAmount").value;
+				totalWithdraw = totalWithdraw + parseFloat(withdrawAmount);
+				document.getElementById("totalWithdraw").innerText =
+					"$" + totalWithdraw;
+				totalBalance = totalBalance - parseFloat(withdrawAmount);
+				document.getElementById("totalBalance").innerText =
+					"$" + totalBalance;
+			});
+		</script>
+	</body>
+</html>
